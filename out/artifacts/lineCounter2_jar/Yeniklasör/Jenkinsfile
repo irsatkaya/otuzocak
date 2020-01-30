@@ -1,0 +1,217 @@
+final def appName = "BOA.IRSAT"
+final def ProjectName = "IRSAT"
+final def appName = "BOA.Loans.Allotment"
+final def ProjectName = "Loans.Allotment"
+final def BuildConfiguration = "release"
+final def nugetPath = "C:\\Jenkins\\Slave\\nuget531.exe"
+final def CodeVersionMajor = 1
+final def codeVersionMinor = 0
+final def codeVersionPatch = 0
+
+pipeline {
+
+  triggers{   pollSCM('*/1 * * * *') }
+
+  agent {
+    node {
+      label 'WindowsBuilder'
+    }
+  }
+
+  options {
+    timeout(time: 20, unit: 'MINUTES')
+    disableConcurrentBuilds()
+    buildDiscarder(logRotator(numToKeepStr: '10'))
+  }
+
+  stages {
+    stage('Resolve Dependency') {
+      steps {
+        script{
+          try{
+           if(env.BRANCH_NAME == 'dev')
+            {
+              bat(script: 'java -jar C:\\Jenkins\\Replacer\\csproj-replacer.jar %WORKSPACE% (?i)..\\\\..\\\\..\\\\..\\\\..\\\\..\\\\..\\\\boa \\\\\\\\SD-TFSBUILD01\\\\boa_git\\$\\\\dev',encoding:'UTF-8')
+              bat(script: 'java -jar C:\\Jenkins\\Replacer\\csproj-replacer.jar %WORKSPACE% (?i)..\\\\..\\\\..\\\\..\\\\..\\\\..\\\\boa \\\\\\\\SD-TFSBUILD01\\\\boa_git\\$\\\\dev',encoding:'UTF-8')
+              bat(script: 'java -jar C:\\Jenkins\\Replacer\\csproj-replacer.jar %WORKSPACE% (?i)..\\\\..\\\\..\\\\..\\\\..\\\\boa \\\\\\\\SD-TFSBUILD01\\\\boa_git\\$\\\\dev',encoding:'UTF-8')
+              bat(script: 'java -jar C:\\Jenkins\\Replacer\\csproj-replacer.jar %WORKSPACE% (?i)d:\\\\boa \\\\\\\\SD-TFSBUILD01\\\\boa_git\\$\\\\dev',encoding:'UTF-8')
+			  bat(script: 'java -jar C:\\Jenkins\\Replacer\\csproj-replacer.jar %WORKSPACE% (?i)d:\\\\boa \\\\\\\\SD-TFSBUILD01\\\\boa_git\\$\\\\dev',encoding:'UTF-8')
+            }
+            if(env.BRANCH_NAME=='QA')
+            {
+              bat(script: 'java -jar C:\\Jenkins\\Replacer\\csproj-replacer.jar %WORKSPACE% (?i)..\\\\..\\\\..\\\\..\\\\..\\\\..\\\\..\\\\boa \\\\\\\\SD-TFSBUILD01\\\\boa_git\\$\\\\QA',encoding:'UTF-8')
+              bat(script: 'java -jar C:\\Jenkins\\Replacer\\csproj-replacer.jar %WORKSPACE% (?i)..\\\\..\\\\..\\\\..\\\\..\\\\..\\\\boa \\\\\\\\SD-TFSBUILD01\\\\boa_git\\$\\\\QA',encoding:'UTF-8')
+              bat(script: 'java -jar C:\\Jenkins\\Replacer\\csproj-replacer.jar %WORKSPACE% (?i)..\\\\..\\\\..\\\\..\\\\..\\\\boa \\\\\\\\SD-TFSBUILD01\\\\boa_git\\$\\\\QA',encoding:'UTF-8')
+              bat(script: 'java -jar C:\\Jenkins\\Replacer\\csproj-replacer.jar %WORKSPACE% (?i)d:\\\\boa \\\\\\\\SD-TFSBUILD01\\\\boa_git\\$\\\\QA',encoding:'UTF-8')
+			  bat(script: 'java -jar C:\\Jenkins\\Replacer\\csproj-replacer.jar %WORKSPACE% (?i)d:\\\\boa \\\\\\\\SD-TFSBUILD01\\\\boa_git\\$\\\\dev',encoding:'UTF-8')
+            }
+            if(env.BRANCH_NAME == 'Release')
+            {
+              bat(script: 'java -jar C:\\Jenkins\\Replacer\\csproj-replacer.jar %WORKSPACE% (?i)..\\\\..\\\\..\\\\..\\\\..\\\\..\\\\..\\\\boa \\\\\\\\SD-TFSBUILD01\\\\boa_git\\$\\\\Release',encoding:'UTF-8')
+              bat(script: 'java -jar C:\\Jenkins\\Replacer\\csproj-replacer.jar %WORKSPACE% (?i)..\\\\..\\\\..\\\\..\\\\..\\\\..\\\\boa \\\\\\\\SD-TFSBUILD01\\\\boa_git\\$\\\\Release',encoding:'UTF-8')
+              bat(script: 'java -jar C:\\Jenkins\\Replacer\\csproj-replacer.jar %WORKSPACE% (?i)..\\\\..\\\\..\\\\..\\\\..\\\\boa \\\\\\\\SD-TFSBUILD01\\\\boa_git\\$\\\\Release',encoding:'UTF-8')
+              bat(script: 'java -jar C:\\Jenkins\\Replacer\\csproj-replacer.jar %WORKSPACE% (?i)d:\\\\boa \\\\\\\\SD-TFSBUILD01\\\\boa_git\\$\\\\Release',encoding:'UTF-8')
+            }
+            if(env.BRANCH_NAME == 'master')
+            {
+              bat(script: 'java -jar C:\\Jenkins\\Replacer\\csproj-replacer.jar %WORKSPACE% (?i)..\\\\..\\\\..\\\\..\\\\..\\\\..\\\\..\\\\boa \\\\\\\\SD-TFSBUILD01\\\\boa_git\\$\\\\master',encoding:'UTF-8')
+              bat(script: 'java -jar C:\\Jenkins\\Replacer\\csproj-replacer.jar %WORKSPACE% (?i)..\\\\..\\\\..\\\\..\\\\..\\\\..\\\\boa \\\\\\\\SD-TFSBUILD01\\\\boa_git\\$\\\\master',encoding:'UTF-8')
+              bat(script: 'java -jar C:\\Jenkins\\Replacer\\csproj-replacer.jar %WORKSPACE% (?i)..\\\\..\\\\..\\\\..\\\\..\\\\boa \\\\\\\\SD-TFSBUILD01\\\\boa_git\\$\\\\master',encoding:'UTF-8')
+              bat(script: 'java -jar C:\\Jenkins\\Replacer\\csproj-replacer.jar %WORKSPACE% (?i)d:\\\\boa \\\\\\\\SD-TFSBUILD01\\\\boa_git\\$\\\\master',encoding:'UTF-8')
+            }
+            bat(script: "${nugetPath} restore %WORKSPACE%\\${appName}.sln", encoding: 'UTF-8')
+            bat(script: "if exist Artifacts rmdir /s /q Artifacts", encoding: 'UTF-8')   
+            bat(script: "mkdir Artifacts", encoding: 'UTF-8') 
+            bat(script: "cd Artifacts & mkdir server & mkdir client & mkdir eod & mkdir task", encoding:'UTF-8')
+          }
+          catch(all)
+          {
+            script{
+            def COMMITTER_EMAIL = bat (
+                            script: "git --no-pager show -s --format=%%ae",
+                              returnStdout: true
+                          ).split('\r\n')[2].trim()
+
+              echo "The last commit was written by ${COMMITTER_EMAIL}"
+              mail(subject: "$PROJECT_NAME - Build # $BUILD_NUMBER - $BUILD_STATUS!", body: "${env.BUILD_URL} \n\n\t Resolve dependency step failed", cc: 'tp.umityasin.karakurt@vakifkatilim.com.tr', from: 'nsuprdldpjenk@vakifkatilim.com.tr', to: "${COMMITTER_EMAIL}")
+              currentBuild.result ='FAILURE'
+            }
+          }
+        }
+      }
+   }
+
+
+    stage('Build') {
+      steps {
+        script{
+          try{
+            bat "\"${tool 'WindowsBuilder'}\" %WORKSPACE%\\${appName}.sln -p:Configuration=${BuildConfiguration}"    // /p:OutDir=%WORKSPACE%\\Artifacts => tüm dll'lerin bu klasöre gelmesi isteniyorsa
+          }
+          catch(all)
+          {
+            script{
+            def COMMITTER_EMAIL = bat (
+                            script: "git --no-pager show -s --format=%%ae",
+                              returnStdout: true
+                          ).split('\r\n')[2].trim()
+
+              echo "The last commit was written by ${COMMITTER_EMAIL}"
+              mail(subject: "$PROJECT_NAME - Build # $BUILD_NUMBER - $BUILD_STATUS!", body: "${env.BUILD_URL} \n\n\t Build step failed", cc: 'tp.umityasin.karakurt@vakifkatilim.com.tr', from: 'nsuprdldpjenk@vakifkatilim.com.tr', to: "${COMMITTER_EMAIL}")
+              currentBuild.result ='FAILURE'
+            }
+          }
+        }
+		  }
+    }
+
+
+    stage('Code Quality') {
+      steps {
+        script{
+          try{
+            bat "\"${tool 'SonarQubeNET'}\"\\SonarScanner.MSBuild.exe begin /d:sonar.issuesReport.html.enable=true /k:${appName}.${env.BRANCH_NAME} /n:${appName}-${env.BRANCH_NAME} /v:${CodeVersionMajor}.${codeVersionMinor}.${codeVersionPatch} /d:sonar.host.url=http://sonarqube.vakifkatilim.local/  /d:sonar.exclusions=obj\\\\*,bin\\\\*,packages\\\\**,Properties\\\\*"
+            bat "\"${tool 'WindowsBuilder'}\" %WORKSPACE%\\${appName}.sln -p:Configuration=${BuildConfiguration} /t:Rebuild"
+            bat "\"${tool 'SonarQubeNET'}\"\\SonarScanner.MSBuild.exe end"
+          }
+          catch(all)
+          {
+            script{
+            def COMMITTER_EMAIL = bat (
+                            script: "git --no-pager show -s --format=%%ae",
+                              returnStdout: true
+                          ).split('\r\n')[2].trim()
+
+              echo "The last commit was written by ${COMMITTER_EMAIL}"
+              mail(subject: "$PROJECT_NAME - Build # $BUILD_NUMBER - $BUILD_STATUS!", body: "${env.BUILD_URL} \n\n\t Sonarqube code quality step failed", cc: 'tp.umityasin.karakurt@vakifkatilim.com.tr', from: 'nsuprdldpjenk@vakifkatilim.com.tr', to: "${COMMITTER_EMAIL}")
+              currentBuild.result ='FAILURE'
+            }
+          }
+        }
+      }
+    }
+
+
+    stage('Archive Artifact') {
+      steps {
+        script{
+          try{
+            /*def server = Artifactory.server 'Artifactory'
+            def promotionConfig = [
+                // Mandatory parameters
+                'buildName'          : buildInfo.name,
+                'buildNumber'        : buildInfo.number,
+                'targetRepo'         : 'artifactory-build-info',
+            
+                // Optional parameters
+                'comment'            : 'this is the promotion comment',
+                'sourceRepo'         : 'example-repo-local',
+                'status'             : 'Released',
+                'includeDependencies': true,
+                'copy'               : true,
+                // 'failFast' is true by default.
+                // Set it to false, if you don't want the promotion to abort upon receiving the first error.
+                'failFast'           : true
+            ]
+            
+            // Promote build
+            server.promote promotionConfig
+
+            def uploadSpec = """{
+              "files": [
+                {
+                  "pattern": "*.dll",
+                  "target": "artifactory-build-info"
+                }
+            ]
+            }"""
+            server.upload(uploadSpec)*/
+            archiveArtifacts(artifacts: '**\\bin\\Release\\BOA.UI.BusinessComponents*.dll,**\\bin\\Release\\BOA.EOD.BusinessComponents*.dll,**\\bin\\Release\\BOA.Types.BusinessComponents*.dll,**\\bin\\Release\\BOA.Messaging.BusinessComponents*.dll,**\\bin\\Release\\BOA.Common.BusinessComponents*.dll,**\\bin\\Release\\BOA.Orchestration.BusinessComponents*.dll,**\\bin\\Release\\BOA.Business.BusinessComponents*.dll,**\\bin\\Release\\BOA.Process.BusinessComponents*.dll,**\\bin\\Release\\BOA.Integration.BusinessComponents*.dll,**\\bin\\Release\\BOA.Engine.BusinessComponents*.dll,**\\bin\\Release\\BOA.Proxy.BusinessComponents*.dll', defaultExcludes: true, excludes: '*.sln,*.exe,**/*.csproj', onlyIfSuccessful: true)
+            //copyArtifacts filter: '**\\bin\\Release\\BOA.UI.BusinessComponents*.dll,**\\bin\\Release\\BOA.EOD.BusinessComponents*.dll,**\\bin\\Release\\BOA.Types.BusinessComponents*.dll,**\\bin\\Release\\BOA.Messaging.BusinessComponents*.dll,**\\bin\\Release\\BOA.Common.BusinessComponents*.dll,**\\bin\\Release\\BOA.Orchestration.BusinessComponents*.dll,**\\bin\\Release\\BOA.Business.BusinessComponents*.dll,**\\bin\\Release\\BOA.Process.BusinessComponents*.dll,**\\bin\\Release\\BOA.Integration.BusinessComponents*.dll,**\\bin\\Release\\BOA.Engine.BusinessComponents*.dll,**\\bin\\Release\\BOA.Proxy.BusinessComponents*.dll', fingerprintArtifacts: true, flatten: true, projectName: currentBuild.projectName, selector: workspace(), target: '%WORKSPACE%\\Artifacts'
+            //bat "ROBOCOPY %WORKSPACE% %WORKSPACE%\\Artifacts /E /S /COPY:DAT /XD *.sln *.csproj /XF **\\bin\\Release\\BOA.UI.BusinessComponents*.* **\\bin\\Release\\BOA.EOD.BusinessComponents*.* **\\bin\\Release\\BOA.Types.BusinessComponents*.* **\\bin\\Release\\BOA.Messaging.BusinessComponents*.* **\\bin\\Release\\BOA.Common.BusinessComponents*.* **\\bin\\Release\\BOA.Orchestration.BusinessComponents*.* **\\bin\\Release\\BOA.Business.BusinessComponents*.* **\\bin\\Release\\BOA.Process.BusinessComponents*.* **\\bin\\Release\\BOA.Integration.BusinessComponents*.* **\\bin\\Release\\BOA.Engine.BusinessComponents*.* **\\bin\\Release\\BOA.Proxy.BusinessComponents*.*"  
+          }
+          catch(all)
+          {
+            script{
+            def COMMITTER_EMAIL = bat (
+                            script: "git --no-pager show -s --format=%%ae",
+                              returnStdout: true
+                          ).split('\r\n')[2].trim()
+
+              echo "The last commit was written by ${COMMITTER_EMAIL}"
+              mail(subject: "$PROJECT_NAME - Build # $BUILD_NUMBER - $BUILD_STATUS!", body: "${env.BUILD_URL} \n\n\t Archive artifacts step failed", cc: 'tp.umityasin.karakurt@vakifkatilim.com.tr', from: 'nsuprdldpjenk@vakifkatilim.com.tr', to: "${COMMITTER_EMAIL}")
+              currentBuild.result ='FAILURE'
+            }
+          }
+        }
+      }
+    }
+
+	  stage('Publish NuGets') {
+      steps {
+        script{
+          try{
+            bat "dir" 
+            //bat "FOR %i IN (Artifacts\\*.dll) DO (${nugetPath} spec Artifacts\\%i)"
+            //bat "C:\\Jenkins\\Slave\\nuget531.exe pack %WORKSPACE%\\Artifacts\\*.dll -Properties version='1.0.0';desc='Description'"
+            //bat "C:\\Jenkins\\Slave\\nuget531.exe push %WORKSPACE%\\Artifacts\\*.nupkg"
+          }
+          catch(all)
+          {
+            script{
+            def COMMITTER_EMAIL = bat (
+                            script: "git --no-pager show -s --format=%%ae",
+                              returnStdout: true
+                          ).split('\r\n')[2].trim()
+
+              echo "The last commit was written by ${COMMITTER_EMAIL}"
+              mail(subject: "$PROJECT_NAME - Build # $BUILD_NUMBER - $BUILD_STATUS!", body: "${env.BUILD_URL} \n\n\t Publish nuget step failed", cc: 'tp.umityasin.karakurt@vakifkatilim.com.tr', from: 'nsuprdldpjenk@vakifkatilim.com.tr', to: "${COMMITTER_EMAIL}")
+              currentBuild.result ='FAILURE'
+            }
+          }
+        }
+      }
+    }
+
+    }
+  }

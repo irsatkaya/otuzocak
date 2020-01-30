@@ -1,0 +1,6 @@
+ilk argüman : değiştirilecek jenkinsfile dosyasının bulunduğu klasor path'i
+ikinci argüman : appName
+üçüncü argüman : ProjectName
+dördüncü argüman : yeni hazırlanan jenkinsfile dosyasının bulunduğu klasor path'i.(her işlem için aynı olacak)
+
+***yeni hazırlanan jenkins file'ın ilk iki satırı silinmiş olmalı.

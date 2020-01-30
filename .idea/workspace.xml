@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ArtifactsWorkspaceSettings">
+    <artifacts-to-build>
+      <artifact name="lineCounter2:jar" />
+    </artifacts-to-build>
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="56de1d7f-9941-40a0-b8f6-e9171e8d6db2" name="Default Changelist" comment="" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectId" id="1X6j5gBGyZ2IHfW9QcELhRDjCLb" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showExcludedFiles" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="project.structure.last.edited" value="Artifacts" />
+    <property name="project.structure.proportion" value="0.15" />
+    <property name="project.structure.side.proportion" value="0.2" />
+    <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
+  </component>
+  <component name="RunManager" selected="Application.main (1)">
+    <configuration name="main (1)" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="irsat.main" />
+      <module name="lineCounter" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="irsat.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="java.main" />
+      <module name="lineCounter" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="java.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.main (1)" />
+        <item itemvalue="Application.main" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="56de1d7f-9941-40a0-b8f6-e9171e8d6db2" name="Default Changelist" comment="" />
+      <created>1580373256200</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1580373256200</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="413" y="153" key="#com.intellij.ide.util.TreeClassChooserDialog" timestamp="1580399270489">
+      <screen x="0" y="0" width="1366" height="738" />
+    </state>
+    <state x="413" y="153" key="#com.intellij.ide.util.TreeClassChooserDialog/0.0.1366.738@0.0.1366.738" timestamp="1580399270489" />
+    <state width="1323" height="198" key="GridCell.Tab.0.bottom" timestamp="1580397147218">
+      <screen x="0" y="0" width="1366" height="738" />
+    </state>
+    <state width="1323" height="198" key="GridCell.Tab.0.bottom/0.0.1366.738@0.0.1366.738" timestamp="1580397147218" />
+    <state width="1323" height="198" key="GridCell.Tab.0.center" timestamp="1580397147218">
+      <screen x="0" y="0" width="1366" height="738" />
+    </state>
+    <state width="1323" height="198" key="GridCell.Tab.0.center/0.0.1366.738@0.0.1366.738" timestamp="1580397147218" />
+    <state width="1323" height="198" key="GridCell.Tab.0.left" timestamp="1580397147218">
+      <screen x="0" y="0" width="1366" height="738" />
+    </state>
+    <state width="1323" height="198" key="GridCell.Tab.0.left/0.0.1366.738@0.0.1366.738" timestamp="1580397147218" />
+    <state width="1323" height="198" key="GridCell.Tab.0.right" timestamp="1580397147218">
+      <screen x="0" y="0" width="1366" height="738" />
+    </state>
+    <state width="1323" height="198" key="GridCell.Tab.0.right/0.0.1366.738@0.0.1366.738" timestamp="1580397147218" />
+    <state x="163" y="0" key="SettingsEditor" timestamp="1580399297088">
+      <screen x="0" y="0" width="1366" height="738" />
+    </state>
+    <state x="163" y="0" key="SettingsEditor/0.0.1366.738@0.0.1366.738" timestamp="1580399297088" />
+  </component>
+</project>

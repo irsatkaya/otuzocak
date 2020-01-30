@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="lineCounter2:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/lineCounter2_jar</output-path>
+    <root id="archive" name="lineCounter.jar">
+      <element id="module-output" name="lineCounter" />
+    </root>
+  </artifact>
+</component>
